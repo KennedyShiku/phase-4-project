@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../../auth.css';
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const LoginForm = () => {
     };
 
     return(
-        <div>
+        <div className='login-form'>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -41,8 +42,11 @@ const LoginForm = () => {
                         required
                     />
                 </div>
-                <button type='submit'>Login</button>
+                <button type='submit' className='btn'>Login</button>
             </form>
+            <div>
+                <p>Don't have an account? <a href='/'>Sign Up</a></p>
+            </div>
         </div>
     );
 };
