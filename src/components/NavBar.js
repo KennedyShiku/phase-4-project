@@ -2,6 +2,7 @@
 
 import React from 'react';
 import '../App.css'; // Import CSS for navigation bar styling
+import { NavLink } from 'react-router-dom';
 
 const NavigationBar = () => {
     const logoUrl = "https://iili.io/J139fWb.png"
@@ -14,7 +15,9 @@ const NavigationBar = () => {
         </div>
         <ul className="nav-links">
           <li><a href="#">Home</a></li>
-          <li><a href="#">Movies</a></li>
+          <li>
+            <NavLink to="/movies" className={"active"}>Movies</NavLink>
+          </li>
           <li><a href="#">Rented Movies</a></li>  
         </ul>
       </div>
