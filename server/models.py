@@ -10,7 +10,8 @@ class User(db.Model):
     username = db.Column(db.String(25))
     email = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
-
+    rental_transaction = db.relationship('RentalTransaction', backref ="users")
+    movie = db.relationship('Movie', secondary = "rental_transactions", backref = "users")
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
@@ -27,10 +28,12 @@ class RentalTransaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    movie_name = db.Column (db.String(100))
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     rental_date = db.Column(db.Integer)
     return_date = db.Column(db.Integer)
+
+
+    
     
 
 class Movie(db.Model):
@@ -41,3 +44,6 @@ class Movie(db.Model):
     genre = db.Column(db.String)
     release_year = db.Column(db.Integer)
     stock = db.Column(db.Integer)
+
+
+    rental_transaction = db.relationship('RentalTransaction', backref ="movies")
