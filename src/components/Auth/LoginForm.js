@@ -55,7 +55,7 @@ const LoginForm = () => {
             })
             .catch(error => {
                 console.error('Login failed:', error);
-            });
+            }); 
     };
 
     return(
