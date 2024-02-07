@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { Link } from 'react-router-dom'
 import '../../auth.css';
 
 const LoginForm = () => {
@@ -87,7 +88,7 @@ const LoginForm = () => {
                 <button type='submit' className='btn'>Login</button>
             </form>
             <div>
-                <p>Don't have an account? <a href='/'>Sign Up</a></p>
+                <p>Don't have an account? <Link to='/register'>Sign Up</Link></p>
             </div>
         </div>
     );
