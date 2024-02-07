@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import '../../auth.css';
 
 const RegisterForm = () => {
@@ -17,6 +18,8 @@ const RegisterForm = () => {
     email: '',
     password: ''
   });
+
+  const mock = new MockAdapter(axios);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +53,10 @@ const RegisterForm = () => {
     }
 
     // Simulate registration request
+    mock.onPost('/register').reply(200, {
+      message: 'User registered successfully'
+    });
+
     axios.post('/register', formData)
       .then(response => {
         console.log('Registration successful:', response.data);
@@ -106,7 +113,7 @@ const RegisterForm = () => {
         <button type='submit' className='btn'>Register</button>
       </form>
       <div>
-        <p>Already have an account? <span onClick={redirectToLogin} style={{cursor: 'pointer'}}>Login</span></p>
+        <p>Already have an account? <span onClick={redirectToLogin} style={{ cursor: 'pointer' }}>Login</span></p>
       </div>
     </div>
   );
