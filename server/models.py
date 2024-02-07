@@ -1,43 +1,43 @@
-# models.py
 from flask_sqlalchemy import SQLAlchemy
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
+
 class User(db.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key =True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25))
-    email = db.Column (db.String (50))
-    password = db.Column(db.String(10))
+    email = db.Column(db.String(50))
+    password_hash = db.Column(db.String(128))
 
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+    
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
-
-class Rental_transaction(db.Model):
+class RentalTransaction(db.Model):
     __tablename__ = "rental_transactions"
 
-    id = db.Column(db.Integer, primary_key= True)
-    user_id = db.Column(db.Integer, db.Foreignkey('users.id'))
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    movie_name = db.Column (db.String(100))
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     rental_date = db.Column(db.Integer)
     return_date = db.Column(db.Integer)
-
-
+    
 
 class Movie(db.Model):
     __tablename__ = "movies"
 
-
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     genre = db.Column(db.String)
     release_year = db.Column(db.Integer)
     stock = db.Column(db.Integer)
-
-
-
-
-
-
-
-
