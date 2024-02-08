@@ -29,7 +29,6 @@ const MovieDetail = ({ movies, onRent }) => {
                     <p>Description: {movie.description}</p>
                 </div>
             </div>
-            {/* <button className="rental-button"  onClick={handleRentedMovie}>Rent This Movie</button> */}
             <button className="buttonDownload" onClick={handleRentedMovie}>Rent this movie</button>
         </div>
     );
