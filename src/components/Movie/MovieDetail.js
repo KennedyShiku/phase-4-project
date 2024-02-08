@@ -1,7 +1,15 @@
 import React from 'react';
-import '../../auth.css'
+import { useParams } from 'react-router-dom';
 
-const MovieDetail = ({ movie }) => {
+const MovieDetail = ({ movies }) => {
+    const { id } = useParams();
+
+    const movie = movies.find(movie => movie.id === parseInt(id));
+
+    if (!movie) {
+        return <div>Movie not found!</div>;
+    }
+
     return (
         <div className="movie-detail">
             <div className="movie-info">
