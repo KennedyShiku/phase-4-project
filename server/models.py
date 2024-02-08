@@ -1,9 +1,11 @@
+# models.py
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +14,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     rental_transaction = db.relationship('RentalTransaction', backref ="users")
     movie = db.relationship('Movie', secondary = "rental_transactions", backref = "users")
-    
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
@@ -23,6 +25,11 @@ class User(db.Model):
     
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+
 
 class RentalTransaction(db.Model):
     __tablename__ = "rental_transactions"
