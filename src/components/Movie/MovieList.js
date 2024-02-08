@@ -2,10 +2,7 @@
 import React from 'react';
 import MovieItem from './MovieItem'; 
 
-const MovieList = ({movies}) => {
-
-
-    
+const MovieList = ({movies}) => {    
 
     return (
         <div className="movie-cards"> 

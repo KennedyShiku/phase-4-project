@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import LoginForm from './components/Auth/LoginForm';
 import RegisterForm from './components/Auth/RegisterForm'; 
@@ -6,9 +6,17 @@ import NavigationBar from './components/NavBar';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import MovieList from './components/Movie/MovieList';
 import MovieDetail from './components/Movie/MovieDetail';
+import RentalHistory from './components/Rental/RentalHistory';
 
-function App() 
-{
+function App() {
+
+  const [rentalHistory, setRentalHistory] = useState([]);
+
+  const addRentedmovie = (movie) => {
+    const rentedMovie = {...movie, rentalDate: new Date()};
+    setRentalHistory([...rentalHistory, rentedMovie])
+  }
+
   const movies = [
     { id: 1, title: 'Movie 1', genre: 'Action', year: 2020, poster: 'https://iili.io/J139fWb.png', releaseDate: '2020-01-01', rating: 7.5 },
     { id: 2, title: 'Movie 2', genre: 'Drama', year: 2019, poster: 'https://iili.io/J139fWb.png', releaseDate: '2019-01-01', rating: 8.0 },
@@ -26,7 +34,8 @@ function App()
         <Outlet/>
         <Routes>
           <Route path='/movies' element={<MovieList movies={movies}/>} />
-          <Route path='movies/:id' element={<MovieDetail movies={movies}/>}/>
+          <Route path='movies/:id' element={<MovieDetail movies={movies} onRent={addRentedmovie}/>}/>
+          <Route path='/rental-history' element={<RentalHistory rentalHistory={rentalHistory}/>}/>
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/" element={<LoginForm />} />
           <Route path="*" element={<Navigate to="/" replace />} />

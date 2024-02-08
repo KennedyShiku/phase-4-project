@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const MovieDetail = ({ movies }) => {
+const MovieDetail = ({ movies, onRent }) => {
     const { id } = useParams();
 
     const movie = movies.find(movie => movie.id === parseInt(id));
@@ -9,6 +9,12 @@ const MovieDetail = ({ movies }) => {
     if (!movie) {
         return <div>Movie not found!</div>;
     }
+
+    const handleRentedMovie = () => {
+        alert('This button has been clicked');
+        onRent(movie)
+    }
+
 
     return (
         <div className="movie-detail">
@@ -22,7 +28,7 @@ const MovieDetail = ({ movies }) => {
                     <p>Description: {movie.description}</p>
                 </div>
             </div>
-            <button className="rent-button">Rent Movie</button>
+            <button className="rent-button"  onClick={handleRentedMovie}>Rent This Movie</button>
         </div>
     );
 };
