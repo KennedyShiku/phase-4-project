@@ -14,11 +14,13 @@ const NavigationBar = () => {
             <img src={logoUrl} alt="Logo" className='logo'/>
         </div>
         <ul className="nav-links">
-          <li><a href="#">Home</a></li>
           <li>
-            <NavLink to="/movies" className={"active"}>Movies</NavLink>
+            <NavLink to="/movies" className={"active"}>Home</NavLink>
           </li>
-          <li><a href="#">Rented Movies</a></li>  
+          <li>
+            {/* <a href="#">Rented Movies</a> */}
+            <NavLink to="/rental-history" className={"active"}>Rented Movies</NavLink>
+          </li>  
         </ul>
       </div>
     </nav>
