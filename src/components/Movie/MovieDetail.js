@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import '../../App.css'
 
 const MovieDetail = ({ movies, onRent }) => {
     const { id } = useParams();
@@ -28,7 +29,8 @@ const MovieDetail = ({ movies, onRent }) => {
                     <p>Description: {movie.description}</p>
                 </div>
             </div>
-            <button className="rent-button"  onClick={handleRentedMovie}>Rent This Movie</button>
+            {/* <button className="rental-button"  onClick={handleRentedMovie}>Rent This Movie</button> */}
+            <button className="buttonDownload" onClick={handleRentedMovie}>Rent this movie</button>
         </div>
     );
 };
