@@ -126,3 +126,33 @@
      0 8px 0 -4px #39a2db,
      0 12px 10px -3px #39a2db;
 }
+
+.movie-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin: 10px;
+    max-width: 300px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .movie-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+  
+  .movie-image {
+    height: 200px;
+    width: auto;
+    border-radius: 8px;
+  }
