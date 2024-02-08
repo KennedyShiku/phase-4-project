@@ -11,7 +11,7 @@ const MovieDetail = ({ movies, onRent }) => {
     }
 
     const handleRentedMovie = () => {
-        alert('This button has been clicked');
+        alert('Movie rented successfully');
         onRent(movie)
     }
 
