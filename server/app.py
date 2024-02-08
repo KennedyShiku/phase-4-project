@@ -3,6 +3,7 @@ from flask_migrate import Migrate, migrate
 from flask import Flask, request
 from models import db, User, Movie, RentalTransaction
 from flask_restful import Api,Resource
+from faker import Faker
 from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
