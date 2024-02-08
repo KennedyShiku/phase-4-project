@@ -1,7 +1,7 @@
 // src/components/NavigationBar.js
 
 import React from 'react';
-import '../App.css'; // Import CSS for navigation bar styling
+import '../App.css'; 
 import { NavLink } from 'react-router-dom';
 
 const NavigationBar = () => {
