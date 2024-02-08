@@ -3,6 +3,7 @@ from flask_migrate import Migrate, migrate
 from flask import Flask, request
 from models import db, User, Movie, RentalTransaction
 from flask_restful import Api,Resource
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 api=Api(app)
@@ -12,7 +13,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 migrate = Migrate(app, db)
 db.init_app(app)
 
-
+#post end ppoint to add users to system
 class AddUser(Resource):
     def post(self):
         data = request.get_json()
@@ -30,11 +31,33 @@ class AddUser(Resource):
         db.session.commit()
         return {'message': 'User added successfully'}, 201
 
+
+#patch end point to update user information
+class UpdateUser(Resource):
+    def patch(self, user_id):
+        user = User.query.get(user_id)
+        if not user:
+            return {'message': 'User not found'}, 404
+
+        data = request.get_json()
+        new_username = data.get('username')
+        new_email = data.get('email')
+        new_password = data.get('password') 
+
+        if new_username:
+            user.username = new_username
+        if new_email:
+            user.email = new_email
+        if new_password:
+            user.password_hash = generate_password_hash(new_password)
+
+        db.session.commit()
+        return {'message': 'User updated successfully'}, 200
+    
 # Add resources to API endpoints
 api.add_resource(AddUser, '/user')
-
-class DeleteUser(Resource):
-    def delete(self):
+api.add_resource(UpdateUser, '/user/<int:user_id>')
+           
 
 
 

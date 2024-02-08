@@ -12,6 +12,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     rental_transaction = db.relationship('RentalTransaction', backref ="users")
     movie = db.relationship('Movie', secondary = "rental_transactions", backref = "users")
+    
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
