@@ -1,21 +1,18 @@
-import React from "react";
-import '../../auth.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MovieItem = ({ movie }) => {
-
-    const handleClick = () => {
-        console.log(`Movie ${movie.id} has been clicked`);
-    }
-
-    return (
-        <div className="movie-card" onClick={handleClick}>
-        <h2>{movie.title}</h2>
+  return (
+    <div className="movie-card">
+      <h2>{movie.title}</h2>
+      <Link to={`/movies/${movie.id}`}>
         <img src={movie.poster} alt={movie.title} className="movie-image" />
-        <p>{movie.description}</p>
-        <p>Release Date: {movie.releaseDate}</p>        
-        <p>Rating: {movie.rating}</p>
-        </div>
-    );
+      </Link>
+      <p>{movie.description}</p>
+      <p>Release Date: {movie.releaseDate}</p>
+      <p>Rating: {movie.rating}</p>
+    </div>
+  );
 };
 
 export default MovieItem;
