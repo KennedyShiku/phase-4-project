@@ -13,7 +13,24 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 migrate = Migrate(app, db)
 db.init_app(app)
 
-#post end ppoint to add users to system
+# Generate random movie data using Faker
+def generate_movie_data():
+    fake = Faker()
+    genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Thriller']
+
+    for _ in range(30):
+        title = fake.catch_phrase()
+        genre = random.choice(genres)
+        release_year = random.randint(1980, 2022)
+        stock = random.randint(1, 100)
+
+        movie = Movie(title=title, genre=genre, release_year=release_year, stock=stock)
+        db.session.add(movie)
+
+    db.session.commit()
+
+
+#POST end ppoint to add users to system
 class AddUser(Resource):
     def post(self):
         data = request.get_json()
@@ -54,9 +71,41 @@ class UpdateUser(Resource):
         db.session.commit()
         return {'message': 'User updated successfully'}, 200
     
+
+class DeleteUser (Resource):
+    def delete(self, user_id):
+        user = User.query.get(user_id)
+        if not user:
+            return {'message':'User not found'}, 404
+        
+        db.session.delete(user)
+        db.session.commit()
+        return{'message': 'User deleted successfully'}, 200
+    
+class AllMovies(Resource):
+    def get(self):
+        movies = Movie.query.all()
+        if not movies:
+            return {'message': 'No movies found'}, 404
+
+        movie_list = []
+        for movie in movies:
+            movie_list.append({
+                'id': movie.id,
+                'title': movie.title,
+                'genre': movie.genre,
+                'release_year': movie.release_year,
+                'stock': movie.stock
+            })
+
+        return {'movies': movie_list}, 200
+
+    
 # Add resources to API endpoints
 api.add_resource(AddUser, '/user')
 api.add_resource(UpdateUser, '/user/<int:user_id>')
+api.add_resource(DeleteUser, '/user/<int:user_id>')
+api.add_resource(AllMovies, '/movies')
            
 
 
