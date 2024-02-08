@@ -3,8 +3,8 @@ from flask_migrate import Migrate, migrate
 from flask import Flask, request
 from models import db, User, Movie, RentalTransaction
 from flask_restful import Api,Resource
-from faker import Faker
 from werkzeug.security import generate_password_hash
+
 
 app = Flask(__name__)
 api=Api(app)
@@ -14,21 +14,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 migrate = Migrate(app, db)
 db.init_app(app)
 
-# Generate random movie data using Faker
-def generate_movie_data():
-    fake = Faker()
-    genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Thriller']
-
-    for _ in range(30):
-        title = fake.catch_phrase()
-        genre = random.choice(genres)
-        release_year = random.randint(1980, 2022)
-        stock = random.randint(1, 100)
-
-        movie = Movie(title=title, genre=genre, release_year=release_year, stock=stock)
-        db.session.add(movie)
-
-    db.session.commit()
 
 
 #POST end ppoint to add users to system
