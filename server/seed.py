@@ -7,7 +7,7 @@ from app import app
 # Generate random movie data using Faker
 def generate_movie_data():
     fake = Faker()
-    genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Thriller']
+    genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'SCI-FI', 'Thriller']
 
     with app.app_context():  # Ensure we're in the application context
         for _ in range(30):
