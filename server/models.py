@@ -53,5 +53,4 @@ class Movie(db.Model):
     release_year = db.Column(db.Integer)
     stock = db.Column(db.Integer)
 
-
     rental_transaction = db.relationship('RentalTransaction', backref ="movies")
