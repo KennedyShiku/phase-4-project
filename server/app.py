@@ -1,3 +1,5 @@
+#app.py
+
 from flask_migrate import Migrate
 from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
@@ -115,15 +117,59 @@ class DeleteUser(Resource):
         db.session.delete(user)
         db.session.commit()
         return {'message': 'User deleted successfully'}, 200
+    
+
+class AddMovieToRental(Resource):
+    @login_required
+    def post(self, user_id, movie_id):
+        user = User.query.get(user_id)
+        movie = Movie.query.get(movie_id)
+        
+        if not user or not movie:
+            return {'message': 'User or movie not found'}, 404
+
+        # Check if the movie is already in the rental transactions
+        if movie in user.movies:
+            return {'message': 'Movie already in rental transactions'}, 400
+
+        rental_transaction = RentalTransaction(user_id=user_id, movie_id=movie_id)
+        db.session.add(rental_transaction)
+        db.session.commit()
+
+        return {'message': 'Movie added to rental transactions successfully'}, 201
+
+
+class RemoveMovieFromRental(Resource):
+    @login_required
+    def delete(self, user_id, movie_id):
+        user = User.query.get(user_id)
+        movie = Movie.query.get(movie_id)
+        
+        if not user or not movie:
+            return {'message': 'User or movie not found'}, 404
+
+        # Check if the movie is in the user's rental transactions
+        rental_transaction = RentalTransaction.query.filter_by(user_id=user_id, movie_id=movie_id).first()
+        if not rental_transaction:
+            return {'message': 'Movie not found in rental transactions for the user'}, 404
+
+        db.session.delete(rental_transaction)
+        db.session.commit()
+
+        return {'message': 'Movie removed from rental transactions successfully'}, 200
 
 
 # Add resources to API endpoints
+
 api.add_resource(AddUser, '/user')
 api.add_resource(UpdateUser, '/user/<int:user_id>')
 api.add_resource(DeleteUser, '/user/<int:user_id>')
 api.add_resource(LoginResource, '/login')
 api.add_resource(LogoutResource, '/logout')
 api.add_resource(DashboardResource, '/dashboard')
+api.add_resource(AddMovieToRental, '/user/<int:user_id>/rent/<int:movie_id>')
+api.add_resource(RemoveMovieFromRental, '/user/<int:user_id>/rent/<int:movie_id>')
+
 
 
 if __name__ == "__main__":
