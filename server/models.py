@@ -2,6 +2,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime, timedelta
+from sqlalchemy import event
 
 db = SQLAlchemy()
 
@@ -13,7 +15,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
     rental_transaction = db.relationship('RentalTransaction', backref ="users")
-    movie = db.relationship('Movie', secondary = "rental_transactions", backref = "users")
+    movies = db.relationship('Movie', secondary = "rental_transactions", backref = "users")
 
     @property
     def password(self):
@@ -37,8 +39,19 @@ class RentalTransaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
-    rental_date = db.Column(db.Integer)
-    return_date = db.Column(db.Integer)
+    rental_date = db.Column(db.DateTime)
+    return_date = db.Column(db.DateTime)
+
+    def __init__(self, user_id, movie_id):
+        self.user_id = user_id
+        self.movie_id = movie_id
+        self.rental_date = datetime.now()
+        self.return_date = self.rental_date + timedelta(days=3)
+
+@event.listens_for(RentalTransaction, 'before_insert')
+def set_rental_dates(mapper, connection, target):
+    target.rental_date = datetime.now()
+    target.return_date = target.rental_date + timedelta(days=3)
 
 
     
@@ -54,3 +67,4 @@ class Movie(db.Model):
     stock = db.Column(db.Integer)
 
     rental_transaction = db.relationship('RentalTransaction', backref ="movies")
+   
