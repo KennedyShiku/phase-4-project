@@ -8,9 +8,9 @@ const MovieItem = ({ movie }) => {
       <Link to={`/movies/${movie.id}`}>
         <img src={movie.poster} alt={movie.title} className="movie-image" />
       </Link>
-      <p>{movie.description}</p>
-      <p>Release Date: {movie.releaseDate}</p>
-      <p>Rating: {movie.rating}</p>
+      <h5>{movie.title}</h5>
+      <p>Release Year: {movie.releaseYear}</p>
+      <p>Genre: {movie.genre}</p>
     </div>
   );
 };

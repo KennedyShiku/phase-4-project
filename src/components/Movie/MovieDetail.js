@@ -12,7 +12,7 @@ const MovieDetail = ({ movies, onRent }) => {
     }
 
     const handleRentedMovie = () => {
-        alert('Movie rented successfully');
+        alert('This button has been clicked');
         onRent(movie)
     }
 
@@ -24,12 +24,10 @@ const MovieDetail = ({ movies, onRent }) => {
                 <div className="details">
                     <h2>{movie.title}</h2>
                     <p>Genre: {movie.genre}</p>
-                    <p>Release Date: {movie.releaseDate}</p>
-                    <p>Rating: {movie.rating}</p>
-                    <p>Description: {movie.description}</p>
+                    <p>Release Year: {movie.releaseYear}</p>
                 </div>
             </div>
-            <button className="buttonDownload" onClick={handleRentedMovie}>Rent this movie</button>
+            <button className="buttonDownload"  onClick={handleRentedMovie}>Rent This Movie</button>
         </div>
     );
 };
