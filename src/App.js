@@ -19,7 +19,7 @@ function App() {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/dashboard'); // Replace with your backend endpoint
+      const response = await axios.get('http://127.0.0.1:5555/dashboard'); 
       setMovies(response.data.movies);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -44,7 +44,7 @@ function App() {
       <Outlet />
       <Routes>
         <Route
-          path="/movies"
+          path="/dashboard"
           element={<MovieList movies={movies} />}
         />
         <Route

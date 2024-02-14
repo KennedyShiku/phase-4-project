@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../../auth.css';
 
 const LoginForm = () => {
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -14,7 +15,7 @@ const LoginForm = () => {
         password: ''
     });
 
-    const navigate = useNavigate(); // Get the navigate function
+    const navigate = useNavigate(); 
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -45,14 +46,17 @@ const LoginForm = () => {
 
         axios.post('http://127.0.0.1:5555/login', formData)
             .then(response => {
-                console.log('Login successful:', response.data);
-                alert('Login successful'); // Consider using a more user-friendly notification system
-                setFormData({ email: '', password: '' });
-                navigate('/dashboard'); // Redirect to dashboard endpoint
+                if (response && response.data) {
+                    console.log('Login successful:', response.data);
+                    setFormData({ email: '', password: '' });
+                    navigate('/dashboard');
+                } else {
+                    console.error('Login failed: Unexpected response format');
+                    alert('Login failed. Please try again later.');
+                }                    
             })
             .catch(error => {
-                console.error('Login failed:', error.response.data.message);
-                // Display error message on UI
+                console.error('Login failed:', error.response ? error.response.data.message : error.message);
                 if (error.response && error.response.data && error.response.data.message) {
                     alert('Login failed: ' + error.response.data.message);
                 } else {
