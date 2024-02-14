@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify'
 import '../../App.css'
 
 const MovieDetail = ({ movies, onRent }) => {
@@ -12,7 +13,7 @@ const MovieDetail = ({ movies, onRent }) => {
     }
 
     const handleRentedMovie = () => {
-        alert('This button has been clicked');
+        toast('Movie rented successfully😎');
         onRent(movie)
     }
 
