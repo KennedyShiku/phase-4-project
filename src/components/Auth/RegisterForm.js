@@ -49,7 +49,7 @@ const RegisterForm = () => {
             return;
         }
 
-        axios.post('http://127.0.0.1:5555/user', formData) // Change 'http://your-backend-url/user' to your actual backend endpoint
+        axios.post('http://127.0.0.1:5555/user', formData)
             .then(response => {
                 console.log('Registration successful:', response.data);
                 alert('Registration successful');
