@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../../auth.css';
 
 const LoginForm = () => {
@@ -50,17 +51,18 @@ const LoginForm = () => {
                     console.log('Login successful:', response.data);
                     setFormData({ email: '', password: '' });
                     navigate('/dashboard');
+                    toast('Login Successful! Welcome😃')
                 } else {
                     console.error('Login failed: Unexpected response format');
-                    alert('Login failed. Please try again later.');
+                    toast('Login failed.🙁');
                 }                    
             })
             .catch(error => {
                 console.error('Login failed:', error.response ? error.response.data.message : error.message);
                 if (error.response && error.response.data && error.response.data.message) {
-                    alert('Login failed: ' + error.response.data.message);
+                    toast('Login failed: ' + error.response.data.message);
                 } else {
-                    alert('Login failed. Please try again later.');
+                    toast('Login failed.🙁');
                 }
             });
     };

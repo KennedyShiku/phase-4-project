@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavigationBar from './components/NavBar';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 import MovieList from './components/Movie/MovieList';
 import MovieDetail from './components/Movie/MovieDetail';
 import RentalHistory from './components/Rental/RentalHistory';
@@ -16,6 +18,7 @@ function App() {
   useEffect(() => {
     fetchMovies();
   }, []);
+
 
   const fetchMovies = async () => {
     try {
@@ -68,6 +71,7 @@ function App() {
           element={<Navigate to="/" replace />}
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
