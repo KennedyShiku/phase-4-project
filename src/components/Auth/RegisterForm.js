@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import '../../auth.css';
 
 const RegisterForm = () => {
@@ -52,7 +53,7 @@ const RegisterForm = () => {
         axios.post('http://127.0.0.1:5555/user', formData)
             .then(response => {
                 console.log('Registration successful:', response.data);
-                alert('Registration successful');
+                toast('Registration successful');
                 setFormData({ username: '', email: '', password: '' });
                 navigate('/login');
             })
