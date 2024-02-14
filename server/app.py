@@ -7,9 +7,11 @@ from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Movie, RentalTransaction
 import secrets
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 # Initialize Flask-Login
 login_manager = LoginManager(app)
 
@@ -48,7 +50,7 @@ class LogoutResource(Resource):
     
 #  dashboard end point
 class DashboardResource(Resource):
-    @login_required
+    # @login_required
     def get(self):
         movies = Movie.query.all()
         movie_list = []
