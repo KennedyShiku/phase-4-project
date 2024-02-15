@@ -3,7 +3,6 @@
   color: #fff;
   padding: 10px 0;
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -12,78 +11,62 @@
   justify-content: space-between; 
   align-items: center; 
 }
-
 .nav-links {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .nav-links li {
   display: inline;
 }
-
 .nav-links li:not(:last-child) {
   margin-right: 20px;
 }
-
 .nav-links li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
 }
-
 .nav-links li a:hover {
   text-decoration: none;
 }
-
 img{
   height: 75px;
   width: 75px;
 }
-
 .movie-detail {
   display: flex;
   justify-content: center;
   align-items: flex-start; 
   margin-top: 20px; 
 }
-
 .movie-info {
   display: flex;
   align-items: flex-start;
 }
-
 .movie-image {
   width: 150px; 
   height: auto; 
 }
-
 .details {
   margin-left: 20px; 
 }
-
 .movie-details {
   text-align: left;
   margin-bottom: 20px;
 }
-
 .rental-history {
   text-align: center;
 }
-
 .rental-history h2 {
   text-decoration: underline;
 }
-
 .rental-history ul{
   list-style-type: none;
 }
-
 .rental-list{
   border-bottom: 2px #333;
 }
-
 .buttonDownload {
   display: inline-block;
   position: relative;
@@ -98,13 +81,11 @@ img{
   border: none;
   border-radius: 15px;
 }
-
 .buttonDownload:hover {
   background-color: #ff4d00;
   color: white;
   cursor: pointer;
 }
-
 .buttonDownload:before, .buttonDownload:after {
   content: ' ';
   display: block;
@@ -112,14 +93,12 @@ img{
   left: 15px;
   top: 52%;
 }
-
 .buttonDownload:before {
   width: 10px;
   height: 2px;
   border-style: solid;
   border-width: 0 2px 2px;
 }
-
 .buttonDownload:after {
   width: 0;
   height: 0;
@@ -132,16 +111,13 @@ img{
   animation: downloadArrow 1s linear infinite;
   animation-play-state: paused;
 }
-
 .buttonDownload:hover:before {
   border-color: #cdefbd;
 }
-
 .buttonDownload:hover:after {
   border-top-color: #cdefbd;
   animation-play-state: running;
 }
-
 @keyframes downloadArrow {
   0% {
     margin-top: -7px;
@@ -162,7 +138,6 @@ img{
     opacity: 0.4;
   }
 }
-
 .remove-button {
   width: 130px;
   height: 40px;
@@ -174,7 +149,6 @@ img{
   border-radius: 5px;
   transition: all .4s;
 }
-
 .remove-button:hover {
   border-radius: 5px;
   transform: translateY(-10px);
@@ -182,7 +156,6 @@ img{
     0 15px 0 -4px #39a2db,
     0 16px 10px -3px #39a2db;
 }
-
 .remove-button:active {
   transition: all 0.2s;
   transform: translateY(-5px);

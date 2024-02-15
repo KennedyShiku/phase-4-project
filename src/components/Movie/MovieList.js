@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MovieItem from './MovieItem';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
@@ -12,17 +13,17 @@ const MovieList = () => {
                 setMovies(response.data.movies);
             } catch (error) {
                 console.error('Error fetching movies:', error);
-                // Handle error fetching movies
             }
         };
 
         fetchMovies();
-    }, []); // Empty dependency array ensures this effect runs only once when component mounts
-
+    }, []); 
     return (
         <div className="movie-cards">
             {movies.map(movie => (
-                <MovieItem key={movie.id} movie={movie} />
+                <Link key={movie.id} to={`/movies/${movie.id}`} className="movie-link"> 
+                    <MovieItem movie={movie} />
+                </Link>
             ))}
         </div>
     );
