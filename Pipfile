@@ -12,6 +12,7 @@ werkzeug = "*"
 faker = "*"
 flask-login = "*"
 flask-cors = "*"
+requests = "*"
 
 [dev-packages]
 

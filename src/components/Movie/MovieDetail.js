@@ -21,7 +21,6 @@ const MovieDetail = ({ movies, onRent }) => {
     return (
         <div className="movie-detail">
             <div className="movie-info">
-                <img src={movie.poster} alt={movie.title} className="movie-image" />
                 <div className="details">
                     <h2>{movie.title}</h2>
                     <p>Genre: {movie.genre}</p>
