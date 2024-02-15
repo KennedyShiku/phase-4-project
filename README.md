@@ -8,6 +8,10 @@ SinemaPrime is a movie rental platform designed to save users money by offering 
 
 As SinemaPrime is deployed on Netlify, installation may not be necessary. Users can access the platform directly through the provided URL.
 
+## Deployed site
+
+Deployed App: [Your App Name](https://sinemaprime.netlify.app/)
+
 ## Usage
 
 Users can browse through the available movie collection, select the desired movie, and rent it for a specific duration. Once rented, users can have the movie directly on the platform. After the rental period expires, access to the movie is automatically revoked, but the user can return the movie once they are done with it.
