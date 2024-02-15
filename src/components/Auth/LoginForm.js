@@ -45,7 +45,7 @@ const LoginForm = () => {
             return;
         }
 
-        axios.post('http://127.0.0.1:5555/login', formData)
+        axios.post('https://movie-rental-35mk.onrender.com/login', formData)
             .then(response => {
                 if (response && response.data) {
                     console.log('Login successful:', response.data);
