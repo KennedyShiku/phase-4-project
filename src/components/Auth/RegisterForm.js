@@ -50,7 +50,7 @@ const RegisterForm = () => {
             return;
         }
 
-        axios.post('http://127.0.0.1:5555/user', formData)
+        axios.post('https://movie-rental-35mk.onrender.com/user', formData)
             .then(response => {
                 console.log('Registration successful:', response.data);
                 toast('Registration successful');
